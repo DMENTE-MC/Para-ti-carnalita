@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Merlina 🌻</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
+    <!-- Estilos mínimos para que se vea INMEDIATAMENTE -->
+    <style>
+        /* RESET RÁPIDO */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0f0a;
+            padding: 15px;
+        }
+
+        /* FONDO FIJO (se ve rápido) */
+        .fireworks-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 30%, #1a3a1a, #0a1f0a);
+            z-index: 1;
+        }
+
+        /* TEXTO DE FONDO */
+        .bg-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(2.5rem, 15vw, 8rem);
+            font-weight: 900;
+            color: rgba(255, 215, 0, 0.1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            text-align: center;
+            width: 100%;
+            text-shadow: 0 0 20px rgba(255,215,0,0.3);
+            animation: bgPulse 4s infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.5; text-shadow: 0 0 20px rgba(255,215,0,0.3); }
+            100% { opacity: 1; text-shadow: 0 0 40px #ffaa00; }
+        }
+
+        /* CONTENEDOR PRINCIPAL (visible de inmediato) */
+        .cristal-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,215,0,0.5);
+            border-radius: 50px 20px;
+            padding: 25px 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* PASTEL (animado desde el inicio) */
+        .cake-section { text-align: center; margin-bottom: 25px; }
+        .cake-container {
+            display: inline-block;
+            position: relative;
+            animation: slideUp 1s ease-out;
+        }
+        @keyframes slideUp {
+            0% { transform: translateY(200px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .cake-emoji { font-size: clamp(6rem, 25vw, 9rem); line-height: 1; filter: drop-shadow(0 15px 15px black); display: block; }
+        .number-badge {
+            position: absolute; top: -10px; right: -10px;
+            background: linear-gradient(145deg, #ffd966, #ffaa00);
+            color: #2d1f00; font-weight: 900;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            width: clamp(70px, 18vw, 100px); height: clamp(70px, 18vw, 100px);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            border: 4px solid white; box-shadow: 0 0 30px #ffaa00;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 50% { transform: scale(1.1); } }
+
+        /* POEMA (ESCRITO DIRECTO, VISIBLE AHORA) */
+        .poem-section {
+            background: rgba(255,255,200,0.15);
+            border-left: 5px solid #ffd966;
+            border-radius: 30px 10px;
+            padding: 25px 20px;
+            margin: 20px 0;
+            position: relative;
+            min-height: 300px;
+        }
+        .repeat-btn {
+            position: absolute; top: 10px; right: 15px;
+            background: #ffd966; border: none; color: #2d1f00;
+            font-weight: bold; padding: 8px 15px; border-radius: 50px;
+            cursor: pointer; z-index: 30; border: 2px solid #ffaa00;
+        }
+        .poem-scroll {
+            max-height: 300px; overflow-y: hidden;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+            margin-top: 30px;
+        }
+        .poem-content {
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            color: #fffbe6; text-shadow: 2px 2px 4px black;
+            line-height: 2.2; padding: 10px 15px;
+            transform: translateY(70%);
+            animation: scrollPoem 35s linear forwards;
+        }
+        @keyframes scrollPoem {
+            0% { transform: translateY(70%); }
+            100% { transform: translateY(-100%); }
+        }
+        .final-message {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 900; color: #ffd966;
+            text-align: center; text-shadow: 3px 3px 0 #2d1f00, 0 0 30px #ffaa00;
+            padding: 30px 10px; display: none; position: relative;
+        }
+        .final-message.show { display: block; }
+        .signature-corner {
+            position: absolute; bottom: 5px; right: 15px;
+            font-size: 0.9rem; color: #ffd966; font-style: italic;
+        }
+
+        /* CARRUSEL (inicialmente oculto) */
+        .carousel-section { margin-top: 30px; opacity: 0; transition: opacity 2s; width: 100%; }
+        .carousel-section.visible { opacity: 1; }
+        .carousel {
+            width: 100%; overflow: hidden;
+            border-radius: 40px 20px; border: 4px solid #ffd966;
+            box-shadow: 0 20px 30px black;
+        }
+        .carousel-track {
+            display: flex; width: 800%;
+            animation: slide 40s infinite linear;
+        }
+        .carousel-track img {
+            width: 12.5%; height: auto; aspect-ratio: 1/1;
+            object-fit: cover; border-right: 2px solid #ffd966;
+        }
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-87.5%); }
+        }
+
+        /* FOOTER */
+        .footer { text-align: center; margin-top: 25px; color: #ffd966; }
+        .sunflowers { font-size: 2rem; letter-spacing: 10px; filter: drop-shadow(0 0 10px #ffd700); }
+        .signature { font-size: 1.1rem; font-weight: bold; border-top: 2px dashed #ffd966; padding-top: 15px; display: inline-block; }
+
+        @media (max-width: 600px) {
+            .poem-content { font-size: 1.1rem; }
+            .number-badge { width: 60px; height: 60px; font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo -->
+    <div class="fireworks-bg">
+        <div class="bg-text">FELIZ CUMPLEAÑOS MERLINA</div>
+    </div>
+
+    <!-- Contenedor principal (TODO ESTO ES VISIBLE AHORA) -->
+    <div class="cristal-container">
+        <!-- Pastel -->
+        <div class="cake-section">
+            <div class="cake-container">
+                <span class="cake-emoji">🎂</span>
+                <span class="number-badge">26</span>
+            </div>
+        </div>
+
+        <!-- POEMA - ESCRITO DIRECTO, SE VE AHORA -->
+        <div class="poem-section">
+            <button class="repeat-btn" id="repeatPoemBtn">↻ Repetir poema</button>
+            
+            <div class="poem-scroll" id="poemScroll">
+                <div class="poem-content" id="poemContent">
+                    <p>Carnalita de mi vida, confidente y amiga,<br>desde la distancia te mando un abrazo</p>
+                    <p>Has sido mi fortaleza, mi escudo<br>me has enseñado a valorarme a mi mismo</p>
+                    <p>Gracias por cada plato de comida que has compartido conmigo<br>Gracias por tus consejos, por creer en mí siempre.</p>
+                    <p>por nunca decir que no,<br>por estar cuando te necesito,</p>
+                    <p>por apoyarme siempre<br>y no dejarme caer.</p>
+                    <p>Que cumplas muchos años mas<br>te quiero un chingo, muchas felicidades</p>
+                    <p>y aunque lejos yo esté<br>te mando un abrazo bien fuerte<br>
+                    <strong style="color:#ffd966;">ATENTAMENTE<br>EL JUNIOR</strong></p>
+                </div>
+            </div>
+
+            <div class="final-message" id="finalMessage">
+                MIS MEJORES DESEOS<br>PARA TI
+                <span class="signature-corner">Te desea Díaz Jr.</span>
+            </div>
+        </div>
+
+        <!-- Carrusel (vacío ahora, se llena después) -->
+        <div class="carousel-section" id="carouselSection">
+            <div class="carousel">
+                <div class="carousel-track" id="carouselTrack"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="sunflowers">🌻 🌻 🌻</div>
+            <div class="signature">ELABORÓ: Jorge Díaz Jr.</div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ===== EJECUTAR INMEDIATAMENTE =====
+            const poemContent = document.getElementById('poemContent');
+            const poemScroll = document.getElementById('poemScroll');
+            const finalMessage = document.getElementById('finalMessage');
+            const repeatBtn = document.getElementById('repeatPoemBtn');
+            const carouselSection = document.getElementById('carouselSection');
+            const carouselTrack = document.getElementById('carouselTrack');
+            
+            let poemTimer = null;
+            const POEM_DURATION = 35000; // 35 segundos
+
+            function startPoem() {
+                if (poemTimer) clearTimeout(poemTimer);
+                
+                // Reset visual
+                poemScroll.style.display = 'block';
+                finalMessage.classList.remove('show');
+                
+                // Reiniciar animación
+                poemContent.style.animation = 'none';
+                setTimeout(() => {
+                    poemContent.style.animation = 'scrollPoem 35s linear forwards';
+                }, 10);
+                
+                poemTimer = setTimeout(() => {
+                    poemScroll.style.display = 'none';
+                    finalMessage.classList.add('show');
+                    carouselSection.classList.add('visible');
+                }, POEM_DURATION);
+            }
+
+            repeatBtn.addEventListener('click', startPoem);
+            
+            // INICIAR POEMA AHORA (sin esperar nada)
+            startPoem();
+
+            // ===== FOTOS: CARGAR MUY TARDE =====
+            // Esto no afecta la carga inicial
+            setTimeout(() => {
+                const fotos = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg', 'foto7.jpg', 'foto8.jpg'];
+                
+                fotos.forEach((foto, index) => {
+                    const img = document.createElement('img');
+                    img.src = `fotos/${foto}`;
+                    img.alt = `Foto ${index + 1}`;
+                    img.loading = 'lazy';
+                    img.onerror = () => { img.src = 'https://via.placeholder.com/300/ffd700/000000?text=Foto' + (index + 1); };
+                    carouselTrack.appendChild(img);
+                });
+            }, 5000); // 5 segundos después de que todo está visible
+
+            // Pausar carrusel si no se ve
+            document.addEventListener('visibilitychange', () => {
+                const track = document.querySelector('.carousel-track');
+                if (track) track.style.animationPlayState = document.hidden ? 'paused' : 'running';
+            });
+        })();
+    </script>
+</body>
+</html>
