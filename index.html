@@ -185,14 +185,14 @@
             
             <div class="poem-scroll" id="poemScroll">
                 <div class="poem-content" id="poemContent">
-                    <p>Carnalita de mi vida, confidente y amiga,<br>desde la distancia te mando un abrazo</p>
-                    <p>Has sido mi fortaleza, mi escudo<br>me has enseñado a valorarme a mi mismo</p>
-                    <p>Gracias por cada plato de comida que has compartido conmigo<br>Gracias por tus consejos, por creer en mí siempre.</p>
-                    <p>por nunca decir que no,<br>por estar cuando te necesito,</p>
+                    <p>Carnalita de mi vida, confidente y amiga,<br>desde la distancia te mando un fuerte abrazo.</p>
+                    <p>Has sido mi fortaleza, mi escudo,<br>me has enseñado a valorarme a mi mismo.</p>
+                    <p>Gracias por cada plato de comida que has compartido conmigo.<br>Gracias por tus consejos, por creer en mí siempre.</p>
+                    <p>Por nunca decir que no,<br>por estar cuando te necesito,</p>
                     <p>por apoyarme siempre<br>y no dejarme caer.</p>
-                    <p>Que cumplas muchos años mas<br>te quiero un chingo, muchas felicidades</p>
-                    <p>y aunque lejos yo esté<br>te mando un abrazo bien fuerte<br>
-                    <strong style="color:#ffd966;">ATENTAMENTE<br>EL JUNIOR</strong></p>
+                    <p>Que cumplas muchos años más,<br>te quiero un chingo, muchas felicidades.</p>
+                    <p>Y aunque lejos yo esté<br>te mando un abrazo bien fuerte.<br>
+                    <strong style="color:#ffd966;">ATENTAMENTE:<br>EL JUNIOR.</strong></p>
                 </div>
             </div>
 
@@ -254,20 +254,27 @@
             // INICIAR POEMA AHORA (sin esperar nada)
             startPoem();
 
-            // ===== FOTOS: CARGAR MUY TARDE =====
-            // Esto no afecta la carga inicial
-            setTimeout(() => {
-                const fotos = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg', 'foto7.jpg', 'foto8.jpg'];
-                
-                fotos.forEach((foto, index) => {
-                    const img = document.createElement('img');
-                    img.src = `fotos/${foto}`;
-                    img.alt = `Foto ${index + 1}`;
-                    img.loading = 'lazy';
-                    img.onerror = () => { img.src = 'https://via.placeholder.com/300/ffd700/000000?text=Foto' + (index + 1); };
-                    carouselTrack.appendChild(img);
-                });
-            }, 5000); // 5 segundos después de que todo está visible
+// ===== FOTOS: CARGAR MUY TARDE =====
+setTimeout(() => {
+    const fotos = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 'foto5.jpg', 'foto6.jpg', 'foto7.jpg', 'foto8.jpg'];
+    
+    fotos.forEach((foto, index) => {
+        const img = document.createElement('img');
+        img.src = foto; // <--- SIN "fotos/"
+        img.alt = `Foto ${index + 1}`;
+        img.loading = 'lazy';
+        img.onerror = () => { 
+            console.log(`No se pudo cargar ${foto}`);
+            img.src = 'https://via.placeholder.com/300/ffd700/000000?text=Foto' + (index + 1); 
+        };
+        carouselTrack.appendChild(img);
+    });
+}, 5000);
+
+
+
+
+            
 
             // Pausar carrusel si no se ve
             document.addEventListener('visibilitychange', () => {
